@@ -1,0 +1,25 @@
+<!-- app/views/users/index.liquid -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Age Averages</title>
+  <a href='/users'> Back To Users </a>
+</head>
+<body>
+  <h1>User Records</h1>
+  {% for daily_record in daily_records %}
+  <div>
+    Date: {{ daily_record.date_fetched }}
+    <br>
+    Male Count: {{ daily_record.male_count }}
+    <br>
+    Female Count: {{ daily_record.female_count }}
+    <br>
+    Male Average Age: {{ daily_record.male_avg_age }}
+    <br>
+    Female Average Age: {{ daily_record.female_avg_age }}
+  </div>
+{% endfor %}
+
+</body>
+</html>

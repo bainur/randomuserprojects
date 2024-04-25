@@ -1,0 +1,49 @@
+<!-- app/views/users/index.liquid -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Records asdfasf</title>
+  <a href='/total'> Total Count </a>
+</head>
+<body>
+  <h1>User Records</h1>
+  <table>
+    <thead>
+      <tr>
+        <!-- Define table headers for each attribute -->
+        <th>UUID</th>
+        <th>Gender</th>
+        <th>Name</th>
+        <th>Location</th>
+        <th>Age</th>
+        <th>Action</th>
+        <!-- Add headers for other attributes as needed -->
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+        <tr>
+          <!-- Render each attribute in a table cell -->
+          <td>{{ user.uuid }}</td>
+          <td>{{ user.gender }}</td>
+          <td>{{ user.name["title"] | append: " " | append: user.name['first']  | append: " "  | append: user.name['last'] }}</td>
+          <td>{{ user.location["city"] }}</td>
+          <td>{{ user.age }}</td>
+          <!-- Add other attribute cells as needed -->
+          <td>
+          <!-- Delete link -->
+            <!-- Convert Rails link_to helper to HTML -->
+<a href="#" onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this user?')) { document.getElementById('delete-user').submit(); }">Delete</a>
+<form id="delete-user" action="/users/{{ user.id }}>" method="POST" style="display: none;">
+  <input type="hidden" name="_method" value="DELETE">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+</form>
+
+</td>
+        </tr>
+      {% endfor %}
+      
+    </tbody>
+  </table>
+</body>
+</html>
