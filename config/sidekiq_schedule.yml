@@ -1,0 +1,4 @@
+fetch_users_job:
+  cron: "*/1 * * * *"
+  class: "FetchUsersJob"
+  queue: "default"

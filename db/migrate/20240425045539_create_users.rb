@@ -6,6 +6,7 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :gender, limit: 6, inclusion: { in: %w[male female] }
       t.jsonb :name
       t.jsonb :location
+      t.integer :age
 
       t.timestamps
     end

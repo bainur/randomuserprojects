@@ -66,6 +66,7 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
+    base64 (0.2.0)
     bootsnap (1.18.3)
       msgpack (~> 1.2)
     builder (3.2.4)
@@ -77,6 +78,11 @@ GEM
       irb (~> 1.10)
       reline (>= 0.3.8)
     erubi (1.12.0)
+    et-orbi (1.2.11)
+      tzinfo
+    fugit (1.11.0)
+      et-orbi (~> 1, >= 1.2.11)
+      raabro (~> 1.4)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.4)
@@ -85,6 +91,19 @@ GEM
     irb (1.12.0)
       rdoc
       reline (>= 0.4.2)
+    kaminari (1.2.2)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.2.2)
+      kaminari-activerecord (= 1.2.2)
+      kaminari-core (= 1.2.2)
+    kaminari-actionview (1.2.2)
+      actionview
+      kaminari-core (= 1.2.2)
+    kaminari-activerecord (1.2.2)
+      activerecord
+      kaminari-core (= 1.2.2)
+    kaminari-core (1.2.2)
+    liquid (4.0.4)
     loofah (2.22.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -99,7 +118,7 @@ GEM
     mini_portile2 (2.8.6)
     minitest (5.22.3)
     msgpack (1.7.2)
-    net-imap (0.3.7)
+    net-imap (0.4.10)
       date
       net-protocol
     net-pop (0.1.2)
@@ -109,7 +128,7 @@ GEM
     net-smtp (0.5.0)
       net-protocol
     nio4r (2.7.1)
-    nokogiri (1.15.6)
+    nokogiri (1.16.4)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     pg (1.5.6)
@@ -117,8 +136,12 @@ GEM
       stringio
     puma (5.6.8)
       nio4r (~> 2.0)
+    raabro (1.4.0)
     racc (1.7.3)
     rack (2.2.9)
+    rack-protection (3.2.0)
+      base64 (>= 0.1.0)
+      rack (~> 2.2, >= 2.2.4)
     rack-test (2.1.0)
       rack (>= 1.3)
     rails (7.0.8.1)
@@ -152,19 +175,23 @@ GEM
     rake (13.2.1)
     rdoc (6.6.3.1)
       psych (>= 4.0.0)
-    redis (5.2.0)
-      redis-client (>= 0.22.0)
-    redis-client (0.22.1)
-      connection_pool
+    redis (4.5.1)
     reline (0.5.3)
       io-console (~> 0.5)
-    sidekiq (7.2.2)
-      concurrent-ruby (< 2)
-      connection_pool (>= 2.3.0)
-      rack (>= 2.2.4)
-      redis-client (>= 0.19.0)
+    rufus-scheduler (3.9.1)
+      fugit (~> 1.1, >= 1.1.6)
+    sidekiq (5.2.10)
+      connection_pool (~> 2.2, >= 2.2.2)
+      rack (~> 2.0)
+      rack-protection (>= 1.5.0)
+      redis (~> 4.5, < 4.6.0)
+    sidekiq-scheduler (5.0.1)
+      rufus-scheduler (~> 3.2)
+      sidekiq (>= 4, < 8)
+      tilt (>= 1.4.0)
     stringio (3.1.0)
     thor (1.3.1)
+    tilt (2.3.0)
     timeout (0.4.1)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
@@ -177,17 +204,21 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  actionview
   bootsnap
   debug
+  kaminari
+  liquid (= 4.0.4)
   pg
   puma (~> 5.0)
   rails (~> 7.0.8)
   redis
-  sidekiq
+  sidekiq (~> 5.2.8)
+  sidekiq-scheduler
   tzinfo-data
 
 RUBY VERSION
-   ruby 2.7.1p83
+   ruby 3.2.2p53
 
 BUNDLED WITH
    2.1.4
