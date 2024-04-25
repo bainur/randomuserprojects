@@ -39,7 +39,7 @@ gem 'pg'
 gem 'actionview'
 gem 'kaminari'
 gem 'liquid', '4.0.4'
-gem 'pry-rails'
+gem 'sidekiq-scheduler'
 
 
 group :development, :test do
