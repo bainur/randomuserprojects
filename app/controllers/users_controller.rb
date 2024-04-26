@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   include ActionView::Rendering  # Include rendering support
 
   def index
-    @users = User.order('id').page(params[:page]).per(100) # Paginate with 10 records per page
+    @users = User.order('id').page(params[:page]).per(1000) # Paginate with 1000 records per page
     liquid_template = Liquid::Template.parse(File.read('app/views/users/index.liquid'))
     rendered_template = liquid_template.render('users' => @users.map(&:attributes), )
     render html: rendered_template.html_safe
