@@ -2,6 +2,7 @@
 class TabulateDailyRecordsJob < ApplicationJob
   def perform
     # count each user based on gender first
+    #binding.pry
     male_count = Redis.current.hget('gender_counts', 'male')
     female_count = Redis.current.hget('gender_counts', 'female')
 

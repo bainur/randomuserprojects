@@ -1,6 +1,6 @@
 # users controller
 class UsersController < ApplicationController
-  include ActionView::Rendering  # Include rendering support
+  include ActionView::Rendering  # Include rendering support, cause i was use the rails api only
 
   def index
     @users = User.order('id').page(params[:page]).per(1000) # Paginate with 1000 records per page
