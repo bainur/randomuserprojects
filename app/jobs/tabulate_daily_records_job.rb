@@ -2,8 +2,9 @@
 class TabulateDailyRecordsJob < ApplicationJob
   def perform
     # count each user based on gender first
-    male_count = User.where(gender: 'male').count
-    female_count = User.where(gender: 'female').count
+    #binding.pry
+    male_count = Redis.current.hget('gender_counts', 'male')
+    female_count = Redis.current.hget('gender_counts', 'female')
 
     # find or update the daily record so daily record will have only 1 row per day
     daily_record = DailyRecord.find_or_initialize_by(date_fetched: Date.today)

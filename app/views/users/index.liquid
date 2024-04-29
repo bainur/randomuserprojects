@@ -2,20 +2,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>User Records asdfasf</title>
-  <a href='/total'> Total Count </a>
+  <title>User Records</title>  
 </head>
 <body>
-  <h1>User Records</h1>
+  <a href='/total'> Daily Count </a>
+  <h1>There Are {{ users.size }} User Records </h1>
+  <form action="/users" method="get">
+    <input type="text" name="search_query" placeholder="Name">
+    <button type="submit">Search</button>
+  </form>
   <table>
     <thead>
       <tr>
         <!-- Define table headers for each attribute -->
-        <th>UUID</th>
         <th>Gender</th>
         <th>Name</th>
-        <th>Location</th>
         <th>Age</th>
+        <th>Created at</th>
         <th>Action</th>
         <!-- Add headers for other attributes as needed -->
       </tr>
@@ -24,11 +27,10 @@
       {% for user in users %}
         <tr>
           <!-- Render each attribute in a table cell -->
-          <td>{{ user.uuid }}</td>
           <td>{{ user.gender }}</td>
           <td>{{ user.name["title"] | append: " " | append: user.name['first']  | append: " "  | append: user.name['last'] }}</td>
-          <td>{{ user.location["city"] }}</td>
           <td>{{ user.age }}</td>
+           <td>{{ user.created_at | date: "%m/%d/%Y %H:%M:%S" }}</td>
           <!-- Add other attribute cells as needed -->
           <td>
           <!-- Delete link -->

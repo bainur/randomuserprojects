@@ -4,10 +4,22 @@ class User < ApplicationRecord
   validates :gender, presence: true, inclusion: { in: %w[male female] }
 
   # ensures that the job is triggered after the transaction is committed to the database
-  after_commit :update_daily_record, on: [:create, :destroy]
-
-  def update_daily_record
-    # update the daily record table for repopulate the data and result of avg, and count
+  after_commit :retabulate_daily, on: [:destroy]
+  
+  # if user delete row, recalculate ther report
+  def retabulate_daily
+    decrement_redis_counts
     TabulateDailyRecordsJob.perform_now
+  end
+
+  private
+
+  def decrement_redis_counts
+    # decrement the redis first. before update tabulation
+    if gender == 'male'
+      Redis.current.hincrby('gender_counts', 'male', -1)
+    else
+      Redis.current.hincrby('gender_counts', 'female', -1)
+    end
   end
 end

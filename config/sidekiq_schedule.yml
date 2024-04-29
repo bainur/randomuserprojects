@@ -2,3 +2,9 @@ fetch_users_job:
   cron: "*/1 * * * *"
   class: "FetchUsersJob"
   queue: "default"
+  priority: 10
+tabulate_daily_records_job:
+  cron: '59 23 * * *'  # Runs at 11:59 PM every day  
+  class: 'TabulateDailyRecordsJob'
+  queue: 'default'
+  priority: 5
