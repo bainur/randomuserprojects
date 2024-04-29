@@ -1,24 +1,46 @@
-# README
+# Fetch Users Rails Application
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This Rails application includes jobs to fetch user data from an external API, store it in the database, and tabulate daily records. It uses Sidekiq for background job processing, PostgreSQL for the database, and Redis for storing gender counts.
 
-Things you may want to cover:
+## Setup
 
-* Ruby version
+1. **Clone the repository:**
 
-* System dependencies
+    ```bash
+    git clone https://github.com/your-username/fetch-users.git
+    cd fetch-users
+    ```
 
-* Configuration
+2. **Install dependencies:**
 
-* Database creation
+    ```bash
+    bundle install
+    ```
 
-* Database initialization
+3. **Setup the database:**
 
-* How to run the test suite
+    ```bash
+    rails db:create
+    rails db:migrate
+    ```
 
-* Services (job queues, cache servers, search engines, etc.)
+4. **Start the Rails server:**
 
-* Deployment instructions
+    ```bash
+    rails server
+    ```
 
-* ...
+5. **Start Sidekiq for background job processing:**
+
+    ```bash
+    bundle exec sidekiq
+    ```
+
+6. **Visit `http://localhost:3000` in your browser to access the application.**
+
+## Running Tests
+
+To run the RSpec tests for this application, execute the following command:
+
+```bash
+bundle exec rspec
